@@ -49,3 +49,6 @@ get_expressions(List, Value, Expression, NormalExpression) :-
 % Main predicate to get the expression for a given value
 expression(List, Value, Expression) :-
     get_expressions(List, Value, _, Expression).
+
+
+% expression([1, 2, 3, 4, 5], 2, X).

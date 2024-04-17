@@ -1,25 +1,28 @@
-po_lewej(X,Y,[X,Y|_]).
-po_lewej(X,Y,[_|Z]):-
-    po_lewej(X,Y,Z).
+on_left(X,Y,[X,Y|_]).
+on_left(X,Y,[_|Z]):-
+    on_left(X,Y,Z).
 
-obok(X,Y,Domy):-
-    po_lewej(X,Y,Domy).
-obok(X,Y,Domy):-
-    po_lewej(Y,X,Domy).
+next_to(X,Y,Houses):-
+    on_left(X,Y,Houses).
+next_to(X,Y,Houses):-
+    on_left(Y,X,Houses).
 
-rybki(Kto):-
-    Domy = [[1,_,norweg,_,_,_],[2,_,_,_,_,_],[3,_,_,_,mleko,_],[4,_,_,_,_,_],[5,_,_,_,_,_]],
-    member([_,czerwony,anglik,_,_,_],Domy),
-    po_lewej([_,zielony,_,_,_,_],[_,bialy,_,_,_,_],Domy),
-    member([_,_,dunczyk,_,herbata,_],Domy),
-    obok([_,_,_,_,_,papierosy_light],[_,_,_,koty,_,_],Domy),
-    member([_,zolty,_,_,_,cygara],Domy),
-    member([_,_,niemiec,_,_,fajka],Domy),
-    obok([_,_,_,_,_,papierosy_light],[_,_,_,_,woda,_],Domy),
-    member([_,_,_,ptaki,_,papierosy_bez_filtra],Domy),
-    member([_,_,szwed,psy,_,_],Domy),
-    obok([_,_,norweg,_,_,_],[_,niebieski,_,_,_,_],Domy),
-    obok([_,_,_,konie,_,_],[_,zolty,_,_,_,_],Domy),
-    member([_,_,_,_,piwo,mentolowe],Domy),
-    member([_,zielony,_,_,kawa,_],Domy),
-    member([_,_,Kto,rybki,_,_],Domy).
+fish(Who):-
+    Houses = [[1,_,norwegian,_,_,_],[2,_,_,_,_,_],[3,_,_,_,milk,_],[4,_,_,_,_,_],[5,_,_,_,_,_]],
+    member([_,red,englishman,_,_,_],Houses),
+    on_left([_,green,_,_,_,_],[_,white,_,_,_,_],Houses),
+    member([_,_,danish,_,tea,_],Houses),
+    next_to([_,_,_,_,_,light_cigarettes],[_,_,_,cats,_,_],Houses),
+    member([_,yellow,_,_,_,cigar],Houses),
+    member([_,_,german,_,_,pipe],Houses),
+    next_to([_,_,_,_,_,light_cigarettes],[_,_,_,_,water,_],Houses),
+    member([_,_,_,birds,_,cigarettes_without_filter],Houses),
+    member([_,_,swede,dogs,_,_],Houses),
+    next_to([_,_,norwegian,_,_,_],[_,blue,_,_,_,_],Houses),
+    next_to([_,_,_,horses,_,_],[_,yellow,_,_,_,_],Houses),
+    member([_,_,_,_,beer,mentol_cigarettes],Houses),
+    member([_,green,_,_,coffee,_],Houses),
+    member([_,_,Who,fish,_,_],Houses).
+
+
+% fish(Who).
