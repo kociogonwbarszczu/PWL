@@ -1,4 +1,41 @@
+generate_match(W, L, X) :-
+    member(X, L) ->
+    write(W), !;
+    atom_length(W, N), tab(N).
+
+horizontal_match(L, N1, N2, N3) :-
+    write(+), generate_match(---, L, N1),
+    write(+), generate_match(---, L, N2),
+    write(+), generate_match(---, L, N3),
+    write(+), nl.
+
+vertical_match(L, N1, N2, N3, N4) :-
+    generate_match("|", L, N1), tab(3),
+    generate_match("|", L, N2), tab(3),
+    generate_match("|", L, N3), tab(3),
+    generate_match("|", L, N4), nl.
+
+draw(X):-
+    horizontal_match(X, 1, 2, 3),
+    vertical_match(X, 4, 5, 6, 7),
+    horizontal_match(X, 8, 9, 10),
+    vertical_match(X, 11, 12, 13, 14),
+    horizontal_match(X, 15, 16, 17),
+    vertical_match(X, 18, 19, 20, 21),
+    horizontal_match(X, 22, 23, 24).
+
 square(_, 0, []).
+
+square(S, N, R) :-
+    N > 1,
+    square(S, 1, X),
+    N1 is N - 1,
+    square(S, N1, Y),
+    min_list(X, SX),
+    min_list(Y, SY),
+    SX < SY,
+    union(X, Y, R),
+    R \= Y.
 
 % 1 Large square
 square(large, 1, [1, 2, 3, 4, 7, 11, 14, 18, 21, 22, 23, 24]).
@@ -20,51 +57,14 @@ square(small, 1, [15, 18, 19, 22]).
 square(small, 1, [16, 19, 20, 23]).
 square(small, 1, [17, 20, 21, 24]).
 
-square(S, N, R) :-
-    N > 1,
-    square(S, 1, X),
-    N1 is N - 1,
-    square(S, N1, Y),
-    min_list(X, SX),
-    min_list(Y, SY),
-    SX < SY,
-    union(X, Y, R),
-    R \= Y.
-    
-generate_chars(W, L, X) :-
-    member(X, L) ->
-    write(W), !;
-    atom_length(W, N), tab(N).
-
-horizontal(L, N1, N2, N3) :-
-    write(+), generate_chars(---, L, N1),
-    write(+), generate_chars(---, L, N2),
-    write(+), generate_chars(---, L, N3),
-    write(+), nl.
-
-vertical(L, N1, N2, N3, N4) :-
-    generate_chars("|", L, N1), tab(3),
-    generate_chars("|", L, N2), tab(3),
-    generate_chars("|", L, N3), tab(3),
-    generate_chars("|", L, N4), nl.
-
-draw(X):-
-    horizontal(X, 1, 2, 3),
-    vertical(X, 4, 5, 6, 7),
-    horizontal(X, 8, 9, 10),
-    vertical(X, 11, 12, 13, 14),
-    horizontal(X, 15, 16, 17),
-    vertical(X, 18, 19, 20, 21),
-    horizontal(X, 22, 23, 24).
-
-matches(C, L, M, S) :-
+matches(K, L, M, S) :-
     square(large, L, S3),
     square(medium, M, S2),
     square(small, S, S1),
     union(S1, S2, U),
     union(U, S3, R),
     length(R, N),
-    C is 24 - N,
+    K is 24 - N,
     draw(R).
 
 
