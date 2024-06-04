@@ -1,0 +1,5 @@
+zad1
+open('ex1.prog', read, X), scanner(X, Y), close(X), phrase(program(PROGRAM), Y).
+
+zad2
+execute('ex1.prog').

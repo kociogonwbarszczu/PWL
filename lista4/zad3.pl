@@ -3,26 +3,26 @@ generate_match(W, L, X) :-
     write(W), !;
     atom_length(W, N), tab(N).
 
-horizontal_match(L, N1, N2, N3) :-
+horizontal_line_match(L, N1, N2, N3) :-
     write(+), generate_match(---, L, N1),
     write(+), generate_match(---, L, N2),
     write(+), generate_match(---, L, N3),
     write(+), nl.
 
-vertical_match(L, N1, N2, N3, N4) :-
+vertical_line_matches(L, N1, N2, N3, N4) :-
     generate_match("|", L, N1), tab(3),
     generate_match("|", L, N2), tab(3),
     generate_match("|", L, N3), tab(3),
     generate_match("|", L, N4), nl.
 
 draw(X):-
-    horizontal_match(X, 1, 2, 3),
-    vertical_match(X, 4, 5, 6, 7),
-    horizontal_match(X, 8, 9, 10),
-    vertical_match(X, 11, 12, 13, 14),
-    horizontal_match(X, 15, 16, 17),
-    vertical_match(X, 18, 19, 20, 21),
-    horizontal_match(X, 22, 23, 24).
+    horizontal_line_match(X, 1, 2, 3),
+    vertical_line_matches(X, 4, 5, 6, 7),
+    horizontal_line_match(X, 8, 9, 10),
+    vertical_line_matches(X, 11, 12, 13, 14),
+    horizontal_line_match(X, 15, 16, 17),
+    vertical_line_matches(X, 18, 19, 20, 21),
+    horizontal_line_match(X, 22, 23, 24).
 
 square(_, 0, []).
 
